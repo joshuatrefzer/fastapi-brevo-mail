@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app.services.brevo_service import (
@@ -7,6 +7,17 @@ from app.services.brevo_service import (
     send_admin_mail,
 )
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://joshuatrefzer.de"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Contact(BaseModel):
     name: str
