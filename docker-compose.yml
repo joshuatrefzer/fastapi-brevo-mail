@@ -1,12 +1,11 @@
-version: "3.9"
-
 services:
-api:
-build: .
-ports:
-- "8082:8082"
-env_file:
-- .env
-volumes:
-- .:/app
-restart: unless-stopped
+  api:
+    build: .
+    ports:
+      - "8082:8082"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8082 --reload
